@@ -1,3 +1,4 @@
+import { Actor } from 'apify';
 import { CheerioCrawler } from 'crawlee';
 
 import { createSessionFunction, createStartUrls } from './jsdom-listener.js';

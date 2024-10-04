@@ -1,0 +1,12 @@
+{
+	"actorSpecification": 1,
+	"name": "tt-popular-hashtag",
+	"title": "Top100 TikTok Hashtags",
+	"description": "Crawlee and Cheerio project in javascript.",
+	"version": "0.0",
+	"meta": {
+		"templateId": "js-crawlee-cheerio"
+	},
+	"input": "./input_schema.json",
+	"dockerfile": "./Dockerfile"
+}
