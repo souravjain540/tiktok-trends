@@ -42,7 +42,7 @@ const crawler = new CheerioCrawler({
         const items = data.list;
         const counter = itemsCounter + items.length;
         const dataItems = items.slice(0, resultsLimit && counter > resultsLimit ? resultsLimit - itemsCounter : undefined);
-        await Actor.pushData(dataItems);
+        await context.pushData(dataItems);
         const { pagination: { page, total } } = data;
         log.info(`Scraped ${dataItems.length} results out of ${total} from search page ${page}`);
         const isResultsLimitNotReached = counter < Math.min(total, resultsLimit);
