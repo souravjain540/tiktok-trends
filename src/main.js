@@ -26,7 +26,6 @@ const crawler = new CheerioCrawler({
             request.headers = {
                 ...request.headers,
                 ...session.userData?.headers,
-
             };
         },
     ],
@@ -42,7 +41,19 @@ const crawler = new CheerioCrawler({
         const items = data.list;
         const counter = itemsCounter + items.length;
         const dataItems = items.slice(0, resultsLimit && counter > resultsLimit ? resultsLimit - itemsCounter : undefined);
-        await context.pushData(dataItems);
+
+        // Format the data as a single text string
+        const textOutput = dataItems.map(item => {
+            // Round video views to the nearest million
+            const roundedViews = Math.round(item.video_views / 1000000);
+            
+            // Format the data as required
+            return `${item.rank}. #${item.hashtag_name} - ${item.industry_info.label} - ${roundedViews}M`;
+        }).join('\n'); // Join the items with a newline between them
+
+        // Push the formatted text as output
+        await context.pushData(textOutput);
+
         const { pagination: { page, total } } = data;
         log.info(`Scraped ${dataItems.length} results out of ${total} from search page ${page}`);
         const isResultsLimitNotReached = counter < Math.min(total, resultsLimit);
